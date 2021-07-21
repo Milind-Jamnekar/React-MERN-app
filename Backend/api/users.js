@@ -25,8 +25,14 @@ router.route("/").post((req, res) => {
 });
 
 // GET /user/<user_id>
-router.route("/:userId").get((req, res) => {
-  Users.findById(req.params.userId, (err, user) =>
+router.route("/:_id").get((req, res) => {
+  Users.findById(req.params._id, (err, user) =>
+    err ? res.status(400).json({ err }) : res.status(200).json({ user })
+  );
+});
+
+router.route("/:_id").put((req, res) => {
+  Users.updateOne(req.params.userId, req.body, (err, user) =>
     err ? res.status(400).json({ err }) : res.status(200).json({ user })
   );
 });
