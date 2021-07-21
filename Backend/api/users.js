@@ -31,8 +31,16 @@ router.route("/:_id").get((req, res) => {
   );
 });
 
+// PUT /user/<user_id>
 router.route("/:_id").put((req, res) => {
-  Users.updateOne(req.params.userId, req.body, (err, user) =>
+  Users.updateOne(req.params._id, req.body, (err, user) =>
+    err ? res.status(400).json({ err }) : res.status(200).json({ user })
+  );
+});
+
+// DELETE /user/<user_id>
+router.route("/:_id").delete((req, res) => {
+  Users.deleteOne(req.params, (err, user) =>
     err ? res.status(400).json({ err }) : res.status(200).json({ user })
   );
 });
