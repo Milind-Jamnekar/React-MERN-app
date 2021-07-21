@@ -24,4 +24,11 @@ router.route("/").post((req, res) => {
     .catch((err) => res.status(400).json("Error" + err));
 });
 
+// GET /user/<user_id>
+router.route("/:userId").get((req, res) => {
+  Users.findById(req.params.userId, (err, user) =>
+    err ? res.status(400).json({ err }) : res.status(200).json({ user })
+  );
+});
+
 export default router;
