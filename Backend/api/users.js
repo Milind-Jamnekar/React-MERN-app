@@ -3,7 +3,7 @@ import Users from "../modals/user.model.js";
 
 const router = Router();
 
-// GET /user
+// GET All /user
 router.route("/").get((req, res) => {
   Users.find()
     .then((users) => res.json(users))
@@ -20,7 +20,7 @@ router.route("/").post((req, res) => {
 
   user
     .save()
-    .then(() => res.json("User Added"))
+    .then(() => res.status(200).json({ msg: "User Added" }))
     .catch((err) => res.status(400).json("Error" + err));
 });
 
@@ -33,7 +33,7 @@ router.route("/:_id").get((req, res) => {
 
 // PUT /user/<user_id>
 router.route("/:_id").put((req, res) => {
-  Users.updateOne(req.params._id, req.body, (err, user) =>
+  Users.updateOne(req.params, req.body, (err, user) =>
     err ? res.status(400).json({ err }) : res.status(200).json({ user })
   );
 });
