@@ -3,20 +3,20 @@ import Table from "./components/Table";
 import Button from "@material-ui/core/Button";
 import AddCircleIcon from "@material-ui/icons/AddCircle";
 import { Link } from "react-router-dom";
+import "./App.css";
+import { allUser, deleteUser } from "./utils/api";
+
 function Page1() {
   const [state, setState] = useState({ data: null, status: "pending" });
-
   const { data, status } = state;
   useEffect(() => {
-    fetch("http://localhost:4000/user")
-      .then((data) => data.json())
-      .then((data) =>
-        setState({
-          data,
-          status: "resolved",
-        })
-      );
+    allUser().then((data) => setState({ data, status: "resolved" }));
   }, []);
+
+  const removeUser = (id) => {
+    const newData = data.filter((user) => user._id !== id);
+    setState({ data: newData });
+  };
 
   if (status === "pending") {
     return <h1>Loading...</h1>;
@@ -24,8 +24,10 @@ function Page1() {
   if (status === "resolved") {
     return (
       <div className="center">
+        {/* Add user Button  */}
         <Link to="/Page2">
           <Button
+            className="btn"
             variant="contained"
             color="primary"
             startIcon={<AddCircleIcon />}
@@ -33,7 +35,8 @@ function Page1() {
             Add User
           </Button>
         </Link>
-        <Table data={data} />;
+        {/* User Table component  */}
+        <Table removeUser={removeUser} data={data} />;
       </div>
     );
   }

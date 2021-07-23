@@ -6,14 +6,16 @@ import TableCell from "@material-ui/core/TableCell";
 import TableContainer from "@material-ui/core/TableContainer";
 import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
-import { Link } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import { Button } from "@material-ui/core";
+import "./User.css";
+import { blue } from "@material-ui/core/colors";
 
 const useStyles = makeStyles({
   table: {
     minWidth: 150,
     maxWidth: 300,
-    margin: "0 auto",
+    margin: "50px auto",
   },
   root: {
     "& > *": {
@@ -24,10 +26,19 @@ const useStyles = makeStyles({
 
 export default function User({ user }) {
   const classes = useStyles();
+  const history = useHistory();
 
-  const { _id, name, email, phone } = user.user;
+  const { _id, name, email, phone } = user;
   return (
-    <TableContainer component={Paper}>
+    <TableContainer className="center" component={Paper}>
+      <Button
+        onClick={() => history.push("/")}
+        variant="contained"
+        color="primary"
+      >
+        Back
+      </Button>
+      <h1 style={{ textAlign: "center", color: "blue" }}>User Details</h1>
       <Table className={classes.table} aria-label="simple table">
         <TableBody>
           <TableRow>
@@ -64,11 +75,6 @@ export default function User({ user }) {
           </TableRow>
         </TableBody>
       </Table>
-      <Link to="/">
-        <Button variant="contained" color="primary">
-          Back
-        </Button>
-      </Link>
     </TableContainer>
   );
 }

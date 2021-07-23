@@ -13,18 +13,17 @@ import { deleteUser } from "../utils/api";
 
 const useStyles = makeStyles((theme) => ({
   table: {
-    minWidth: 150,
-    maxWidth: 700,
+    maxWidth: 800,
     margin: "0 auto",
   },
   root: {
     "& > *": {
-      margin: "0 5px ",
+      margin: "0 10px ",
     },
   },
 }));
 
-export default function BasicTable({ data = [] }) {
+export default function BasicTable({ data = [], removeUser }) {
   const classes = useStyles();
 
   return (
@@ -41,18 +40,21 @@ export default function BasicTable({ data = [] }) {
           </TableRow>
         </TableHead>
         <TableBody>
+          {/* Dynamic Data Being Mounted by interation through  */}
           {data &&
-            data.map((row) => (
-              <TableRow key={row._id}>
+            data.map((row, index) => (
+              <TableRow key={index}>
                 <TableCell component="th" scope="row">
                   <b>{row._id}</b>
                 </TableCell>
                 <TableCell align="right">{row.name}</TableCell>
                 <TableCell align="right">
+                  {/* Action Buttons on Table (View, update, delete) */}
                   <div className={classes.root}>
                     <Link
                       to={{
-                        pathname: `/Page3/${row._id}`,
+                        pathname: `/Page3`,
+                        user: { ...row },
                       }}
                     >
                       <Button variant="contained" size="small" color="default">
@@ -70,6 +72,7 @@ export default function BasicTable({ data = [] }) {
                       </Button>
                     </Link>
                     <Button
+                      // onClick={() => removeUser(row._id)}
                       onClick={() => deleteUser(row._id)}
                       variant="contained"
                       size="small"
