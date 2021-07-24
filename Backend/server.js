@@ -27,7 +27,7 @@ app.use("/*", (req, res) => {
   });
 });
 
-const port = process.env.PORT || 4000;
+const port = process.env.PORT || 5000;
 app.listen(port, () =>
   console.log("Server is listinering on port http://localhost:4000 ✅")
 );
