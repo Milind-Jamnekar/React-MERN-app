@@ -7,8 +7,6 @@ import Slider from "../UI/Slider";
 import { addUser, updateUser } from "../utils/api";
 import Paper from "@material-ui/core/Paper";
 
-import "./Form.css";
-
 const useStyles = makeStyles((theme) => ({
   root: {
     "& > *": {
@@ -31,20 +29,20 @@ export default function Form() {
       return;
     }
 
-    setOpen({ open: false });
+    setOpen(false);
   };
 
   const handleSubmit = (e, method) => {
     // For Adding User In DB
     if (method === "add") {
-      addUser(e).then(() => setOpen(false));
+      addUser(e).then(() => setOpen(true));
       e.target.reset();
       return;
     }
 
     // For Updataing User in DB
     if (method === "update") {
-      updateUser(e, user._id).then(() => setOpen(false));
+      updateUser(e, user._id).then(() => setOpen(true));
     }
   };
   return (
@@ -93,7 +91,6 @@ export default function Form() {
           >
             {user ? "Update" : "Add User"}
           </Button>
-          {open}
           <Slider open={open} handleClose={handleClose} />
         </form>
       </Paper>

@@ -9,7 +9,6 @@ import Paper from "@material-ui/core/Paper";
 import { useHistory } from "react-router-dom";
 import { Button } from "@material-ui/core";
 import "./User.css";
-import { blue } from "@material-ui/core/colors";
 
 const useStyles = makeStyles({
   table: {

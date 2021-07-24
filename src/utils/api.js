@@ -2,8 +2,9 @@ import { useEffect, useRef, useState } from "react";
 const endpoint = "https://my-own-api.herokuapp.com" || "http://localhost:5000";
 
 const deleteUser = (id) => {
-  fetch(`${endpoint}/user/${id}`, { method: "DELETE" });
-  window.location.reload();
+  fetch(`${endpoint}/user/${id}`, { method: "DELETE" }).then((data) =>
+    window.location.reload()
+  );
 };
 
 const allUser = () => {

@@ -4,7 +4,7 @@ import Button from "@material-ui/core/Button";
 import AddCircleIcon from "@material-ui/icons/AddCircle";
 import { Link } from "react-router-dom";
 import "./App.css";
-import { allUser, deleteUser } from "./utils/api";
+import { allUser } from "./utils/api";
 
 function Page1() {
   const [state, setState] = useState({ data: null, status: "pending" });
