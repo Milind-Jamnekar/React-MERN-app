@@ -1,13 +1,14 @@
 import { useEffect, useRef, useState } from "react";
+const endpoint = "https://my-own-api.herokuapp.com" || "http://localhost:5000";
 
 const deleteUser = (id) => {
-  fetch(`http://localhost:4000/user/${id}`, { method: "DELETE" });
+  fetch(`${endpoint}/user/${id}`, { method: "DELETE" });
   window.location.reload();
 };
 
 const allUser = () => {
   return new Promise((res, rej) => {
-    fetch("http://localhost:4000/user")
+    fetch(`${endpoint}/user`)
       .then((data) => data.json())
       .then((data) => res(data))
       .catch((err) => rej(err));
@@ -23,7 +24,7 @@ const addUser = (e) => {
   };
 
   return new Promise((res, rej) => {
-    fetch(`http://localhost:4000/user`, {
+    fetch(`${endpoint}/user`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -45,7 +46,7 @@ const updateUser = (e, id) => {
   };
 
   return new Promise((res, rej) => {
-    fetch(`http://localhost:4000/user/${id}`, {
+    fetch(`${endpoint}/user/${id}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
